@@ -44,7 +44,9 @@ class Book
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Author")
+     * @var \Doctrine\Common\Collections\Collection|Author[]
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Author", mappedBy="authors")
      */
     private $authors;
 
@@ -132,7 +134,8 @@ class Book
     public function addAuthor(Author $author): self
     {
         if (!$this->authors->contains($author)) {
-            $this->authors[] = $author;
+            $this->authors->add($author);
+            $author->addBook($this);
         }
 
         return $this;
@@ -142,6 +145,7 @@ class Book
     {
         if ($this->authors->contains($author)) {
             $this->authors->removeElement($author);
+            $author->removeBook($this);
         }
 
         return $this;

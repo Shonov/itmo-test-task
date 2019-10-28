@@ -34,7 +34,9 @@ class Author
     private $middleName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Book")
+     * @var \Doctrine\Common\Collections\Collection|Book[]
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", inversedBy="books", cascade={"persist", "remove"})
      */
     private $books;
 
@@ -98,7 +100,8 @@ class Author
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
-            $this->books[] = $book;
+            $this->books->add($book);
+            $book->addAuthor($this);
         }
 
         return $this;
@@ -108,6 +111,7 @@ class Author
     {
         if ($this->books->contains($book)) {
             $this->books->removeElement($book);
+            $book->removeAuthor($this);
         }
 
         return $this;

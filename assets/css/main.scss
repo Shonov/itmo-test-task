@@ -1,0 +1,109 @@
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.menu {
+  background: black;
+  padding: 15px 20px;
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+
+  &__logo {
+    text-decoration: none;
+  }
+
+  &__logo > &__link:hover {
+    text-decoration: none;
+  }
+
+  &__item {
+    padding: 15px 5px;
+    width: 100%;
+    text-align: center;
+    order: 3;
+    display: none;
+
+    &--showed {
+      display: block;
+    }
+
+    &--auth {
+      order: 2;
+    }
+  }
+
+  &__link {
+    white-space: nowrap;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+
+    &--active {
+      color: #5eb5e0;
+      text-decoration: underline;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__toggle {
+    order: 1;
+    max-width: 20px;
+  }
+}
+
+
+@media all and (min-width: 600px) {
+  .menu {
+    &__toggle {
+      text-align: right;
+    }
+  }
+}
+
+/* Desktop menu */
+@media all and (min-width: 900px) {
+  .menu {
+    &__content {
+      justify-content: center;
+    }
+
+    &__item {
+      display: block;
+      width: auto;
+      order: 1;
+      padding: 15px 10px;
+    }
+
+    &__logo {
+      flex: 1;
+      order: 0;
+    }
+
+    &__link {
+    }
+
+    &__toggle {
+      display: none;
+    }
+  }
+}

@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Welcome!{% endblock %} | University ITMO</title>
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('main') }}
+  {% endblock %}
+</head>
+
+<body>
+<main>
+  <header>
+    <nav class="menu">
+      <ul class="menu__content">
+        {% set page =  app.request.get('_route') %}
+        <li class="menu__logo"><a href="{{ path('home') }}" class="menu__link">University ITMO</a></li>
+        <li class="menu__item"><a href="{{ path('books') }}" class="menu__link {% if page == 'books' %}menu__link--active{% endif %}">Books</a></li>
+        <li class="menu__item"><a href="{{ path('authors') }}" class="menu__link {% if page == 'authors' %}menu__link--active{% endif %}">Authors</a></li>
+        <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Log In</a></li>
+        <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Sign Up</a></li>
+        <li class="menu__toggle"><a href="#" class="menu__link"><i class="fas fa-bars"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+  {% block body %}{% endblock %}
+</main>
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('main') }}
+{% endblock %}
+</body>
 </html>
