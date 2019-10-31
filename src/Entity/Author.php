@@ -36,7 +36,7 @@ class Author
     /**
      * @var \Doctrine\Common\Collections\Collection|Book[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Book", inversedBy="books", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Book", inversedBy="authors", cascade={"persist", "remove"})
      */
     private $books;
 
@@ -107,6 +107,11 @@ class Author
         return $this;
     }
 
+
+    /**
+     * @param Book $book
+     * @return Author
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->contains($book)) {
@@ -115,5 +120,15 @@ class Author
         }
 
         return $this;
+    }
+
+    /**
+     * get surname and initials
+     *
+     * @return string
+     */
+    public function getShortName(): ?string
+    {
+        return ucwords($this->lastName . ' ' . substr($this->firstName, 0, 1) . ' ' . substr($this->middleName, 0, 1));
     }
 }

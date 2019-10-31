@@ -1,4 +1,6 @@
 {
+    "name" : "shonov/itmo",
+    "description" : "Simple test task",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -26,9 +28,11 @@
         "symfony/validator": "4.3.*",
         "symfony/web-link": "4.3.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "4.3.*"
+        "symfony/yaml": "4.3.*",
+        "ext-intl": "*"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "^3.2",
         "fzaninotto/faker": "^1.8",
         "symfony/debug-pack": "*",

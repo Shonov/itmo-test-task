@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
@@ -40,13 +42,15 @@ class Book
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
+     *
      */
     private $image;
 
     /**
      * @var \Doctrine\Common\Collections\Collection|Author[]
      *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Author", mappedBy="authors")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Author", mappedBy="books")
      */
     private $authors;
 
@@ -111,12 +115,19 @@ class Book
         return $this;
     }
 
-    public function getImage(): ?string
+    /**
+     * @return string|null|UploadedFile
+     */
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    /**
+     * @param string|null|UploadedFile $image
+     * @return self
+     */
+    public function setImage($image): self
     {
         $this->image = $image;
 

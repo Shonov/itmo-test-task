@@ -3,11 +3,16 @@
 {% block title %}Edit Author{% endblock %}
 
 {% block body %}
-    <h1>Edit Author</h1>
+    <section class="section create-form">
+        <div class="section__content create-form__content">
 
-    {{ include('author/_form.html.twig', {'button_label': 'Update'}) }}
+            <h1 class="section__title">Edit Author</h1>
+            {{ include('author/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('author_index') }}">back to list</a>
-
-    {{ include('author/_delete_form.html.twig') }}
+            <div>
+                {{ include('author/_delete_form.html.twig') }}
+                <a href="{{ path('author_index') }}" class="section__create-link">back to list</a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

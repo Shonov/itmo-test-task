@@ -3,41 +3,41 @@
 {% block title %}Book index{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>PublicationDate</th>
-                <th>Isbn</th>
-                <th>PageCount</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.publicationDate ? book.publicationDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ book.isbn }}</td>
-                <td>{{ book.pageCount }}</td>
-                <td>{{ book.image }}</td>
-                <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
+  <section class="section books">
+    <h1 class="section__title books__title">Books list</h1>
+
+    <a href="{{ path('book_new') }}" class="section__create-link">Add new book</a>
+
+    <table class="table table-light">
+      <thead>
+      <tr>
+        <th>№</th>
+        <th>Title</th>
+        <th>Publication Date</th>
+        <th>Page Count</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for book in books %}
+        {% set counter = (counter | default(0) ) + 1 %}
+        <tr>
+          <td>{{ counter }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.publicationDate ? book.publicationDate|date('Y') : '' }}</td>
+          <td>{{ book.pageCount }}</td>
+          <td>
+            <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
+            <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="7">no records found</td>
+        </tr>
+      {% endfor %}
+      </tbody>
     </table>
-
-    <a href="{{ path('book_new') }}">Create new</a>
+  </section>
 {% endblock %}

@@ -78,6 +78,12 @@ Encore
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
     })
+
+  .copyFiles({
+    from: './assets/images',
+    to: 'images/[path][name].[ext]',
+    pattern: /\.(png|jpg|jpeg)$/
+  })
 ;
 
 module.exports = Encore.getWebpackConfig();

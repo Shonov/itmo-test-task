@@ -3,9 +3,13 @@
 {% block title %}New Book{% endblock %}
 
 {% block body %}
-    <h1>Create new Book</h1>
+    <section class="section create-form">
+        <div class="section__content create-form__content">
+            <h1 class="section__title">Create new Book</h1>
 
-    {{ include('book/_form.html.twig') }}
+            {{ include('book/_form.html.twig') }}
 
-    <a href="{{ path('book_index') }}">back to list</a>
+            <a href="{{ path('book_index') }}" class="section__create-link">back to list</a>
+        </div>
+    </section>
 {% endblock %}

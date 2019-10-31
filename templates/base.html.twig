@@ -10,22 +10,27 @@
 </head>
 
 <body>
+<header>
+  <nav class="menu">
+    <ul class="menu__content">
+      {% set page =  app.request.get('_route') %}
+      <li class="menu__logo"><a href="{{ path('home') }}" class="menu__link">University ITMO</a></li>
+      <li class="menu__item"><a href="{{ path('book_index') }}" class="menu__link {% if page == 'book_index' %}menu__link--active{% endif %}">Books</a></li>
+      <li class="menu__item"><a href="{{ path('author_index') }}" class="menu__link {% if page == 'author_index' %}menu__link--active{% endif %}">Authors</a></li>
+      <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Log In</a></li>
+      <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Sign Up</a></li>
+      <li class="menu__toggle"><a href="#" class="menu__link"><i class="fas fa-bars"></i></a></li>
+    </ul>
+  </nav>
+</header>
+
 <main>
-  <header>
-    <nav class="menu">
-      <ul class="menu__content">
-        {% set page =  app.request.get('_route') %}
-        <li class="menu__logo"><a href="{{ path('home') }}" class="menu__link">University ITMO</a></li>
-        <li class="menu__item"><a href="{{ path('books') }}" class="menu__link {% if page == 'books' %}menu__link--active{% endif %}">Books</a></li>
-        <li class="menu__item"><a href="{{ path('authors') }}" class="menu__link {% if page == 'authors' %}menu__link--active{% endif %}">Authors</a></li>
-        <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Log In</a></li>
-        <li class="menu__item menu__item--auth"><a href="#" class="menu__link">Sign Up</a></li>
-        <li class="menu__toggle"><a href="#" class="menu__link"><i class="fas fa-bars"></i></a></li>
-      </ul>
-    </nav>
-  </header>
   {% block body %}{% endblock %}
 </main>
+
+<footer class="footer">
+  <p class="footer__text">&copy; 2019 Saint-Petersburg</p>
+</footer>
 
 {% block javascripts %}
   {{ encore_entry_script_tags('main') }}
