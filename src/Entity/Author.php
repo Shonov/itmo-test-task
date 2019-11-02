@@ -131,4 +131,12 @@ class Author
     {
         return ucwords($this->lastName . ' ' . substr($this->firstName, 0, 1) . ' ' . substr($this->middleName, 0, 1));
     }
+
+    /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return ucwords($this->lastName . ' ' . $this->firstName . ' ' . $this->middleName);
+    }
 }
